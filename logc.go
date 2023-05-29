@@ -7,34 +7,35 @@ import (
 )
 
 const (
-	tracePrefix  = "TRACE"
-	debugPrefix  = "DEBUG"
-	infoPrefix   = "INFO"
-	normalPrefix = "NORMAL"
-	warnPrefix   = "WARN"
-	errorPrefix  = "ERROR"
-	fatalPrefix  = "FATAL"
+	tracePrefix  = "[TRACE] "
+	debugPrefix  = "[DEBUG] "
+	infoPrefix   = "[INFO.] "
+	normalPrefix = "[NORM.] "
+	warnPrefix   = "[WARN.] "
+	errorPrefix  = "[ERROR] "
+	fatalPrefix  = "[FATAL] "
 )
 
 var (
-	traceLog  = log.New(os.Stdout, tracePrefix, log.LstdFlags|log.Llongfile)
-	debugLog  = log.New(os.Stdout, debugPrefix, log.LstdFlags)
-	infoLog   = log.New(os.Stdout, infoPrefix, log.LstdFlags)
-	normalLog = log.New(os.Stdout, normalPrefix, log.LstdFlags)
-	warnLog   = log.New(os.Stderr, warnPrefix, log.LstdFlags)
-	errorLog  = log.New(os.Stderr, errorPrefix, log.LstdFlags)
-	fatalLog  = log.New(os.Stderr, fatalPrefix, log.LstdFlags)
+	traceLog = log.New(os.Stdout, tracePrefix,
+		log.LstdFlags|log.Llongfile|log.Lmsgprefix)
+	debugLog  = log.New(os.Stdout, debugPrefix, log.LstdFlags|log.Lmsgprefix)
+	infoLog   = log.New(os.Stdout, infoPrefix, log.LstdFlags|log.Lmsgprefix)
+	normalLog = log.New(os.Stdout, normalPrefix, log.LstdFlags|log.Lmsgprefix)
+	warnLog   = log.New(os.Stderr, warnPrefix, log.LstdFlags|log.Lmsgprefix)
+	errorLog  = log.New(os.Stderr, errorPrefix, log.LstdFlags|log.Lmsgprefix)
+	fatalLog  = log.New(os.Stderr, fatalPrefix, log.LstdFlags|log.Lmsgprefix)
 )
 
 // SetPrefix is used to set the prefix of the log
 func SetPrefix(prefix string) {
-	traceLog.SetPrefix(fmt.Sprintf("%s %s", tracePrefix, prefix))
-	debugLog.SetPrefix(fmt.Sprintf("%s %s", debugPrefix, prefix))
-	infoLog.SetPrefix(fmt.Sprintf("%s %s", infoPrefix, prefix))
-	normalLog.SetPrefix(fmt.Sprintf("%s %s", normalPrefix, prefix))
-	warnLog.SetPrefix(fmt.Sprintf("%s %s", warnPrefix, prefix))
-	errorLog.SetPrefix(fmt.Sprintf("%s %s", errorPrefix, prefix))
-	fatalLog.SetPrefix(fmt.Sprintf("%s %s", fatalPrefix, prefix))
+	traceLog.SetPrefix(fmt.Sprintf("%s%s ", tracePrefix, prefix))
+	debugLog.SetPrefix(fmt.Sprintf("%s%s ", debugPrefix, prefix))
+	infoLog.SetPrefix(fmt.Sprintf("%s%s ", infoPrefix, prefix))
+	normalLog.SetPrefix(fmt.Sprintf("%s%s ", normalPrefix, prefix))
+	warnLog.SetPrefix(fmt.Sprintf("%s%s ", warnPrefix, prefix))
+	errorLog.SetPrefix(fmt.Sprintf("%s%s ", errorPrefix, prefix))
+	fatalLog.SetPrefix(fmt.Sprintf("%s%s ", fatalPrefix, prefix))
 }
 
 // Trace print the message in the trace level
