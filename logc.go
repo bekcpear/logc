@@ -177,7 +177,7 @@ func (lc *LogC) Fatal(msg ...any) {
 		_, file, num, ok := runtime.Caller(skip)
 		fa := strings.Split(file, "/")
 		for fa[len(fa)-3] == "oss.ac" &&
-			fa[len(fa)-2] == "logc" &&
+			fa[len(fa)-2][:4] == "logc" &&
 			strings.Split(fa[len(fa)-1], ":")[0] == "logc.go" {
 			skip++
 			_, file, num, ok = runtime.Caller(skip)
@@ -233,7 +233,7 @@ func (lc *LogC) Fatalf(format string, msg ...any) {
 		_, file, num, ok := runtime.Caller(skip)
 		fa := strings.Split(file, "/")
 		for fa[len(fa)-3] == "oss.ac" &&
-			fa[len(fa)-2] == "logc" &&
+			fa[len(fa)-2][:4] == "logc" &&
 			strings.Split(fa[len(fa)-1], ":")[0] == "logc.go" {
 			skip++
 			_, file, num, ok = runtime.Caller(skip)
