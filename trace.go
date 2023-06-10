@@ -2,6 +2,8 @@
 
 package logc
 
+import "fmt"
+
 // Trace print the message in the trace level
 func Trace(msg ...any) {
 	defaultLogC.Trace(msg...)
@@ -14,14 +16,14 @@ func Tracef(format string, msg ...any) {
 
 // Trace print the message in the trace level
 func (lc *LogC) Trace(msg ...any) {
-	if lc.conf.Level >= LevelTrace {
-		lc.traceLog.Println(msg...)
+	if lc.conf.level >= LevelTrace {
+		lc.output(TraceLog, fmt.Sprintln(msg...))
 	}
 }
 
 // Tracef act like Trace but with format
 func (lc *LogC) Tracef(format string, msg ...any) {
-	if lc.conf.Level >= LevelTrace {
-		lc.traceLog.Printf(format, msg...)
+	if lc.conf.level >= LevelTrace {
+		lc.output(TraceLog, fmt.Sprintf(format, msg...))
 	}
 }
