@@ -77,10 +77,12 @@ func SetOutput(w io.Writer, index ...int) {
 
 // StdoutTo set the default stdout loggers to new writer.
 func StdoutTo(w io.Writer) {
+	defaultLogC.StdoutTo(w)
 }
 
 // StderrTo set the default stderr loggers to new writer.
 func StderrTo(w io.Writer) {
+	defaultLogC.StderrTo(w)
 }
 
 // Debug print the message in the debug level
